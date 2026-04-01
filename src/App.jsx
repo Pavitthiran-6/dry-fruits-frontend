@@ -37,8 +37,8 @@ const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
 
 // Loading component
 const LoadingSpinner = () => (
-  <div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50">
-    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50">
+    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
   </div>
 );
 
