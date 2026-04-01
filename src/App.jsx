@@ -136,6 +136,9 @@ const AnimatedRoutes = () => {
           <Route path="add-product" element={<AnimatedPage><AddEditProduct /></AnimatedPage>} />
           <Route path="edit-product/:id" element={<AnimatedPage><AddEditProduct /></AnimatedPage>} />
         </Route>
+
+        {/* ✅ Catch-all: Redirect unknown routes to home */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </AnimatePresence>
   );
