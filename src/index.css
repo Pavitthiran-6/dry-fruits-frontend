@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .home-page .hero-title {
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .home-page .hero-line {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1200px) {
+    .home-page .hero-line {
+      white-space: normal;
+    }
+  }
+
+  .glass-card {
+    @apply bg-white/90 backdrop-blur-md border border-white/20;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-white text-purple-600 font-semibold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.03),
+      0 8px 16px rgba(0, 0, 0, 0.05),
+      0 20px 40px rgba(0, 0, 0, 0.06);
+    transform: translateY(-4px);
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* GPU acceleration for smooth animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Optimize rendering performance */
+  .render-optimized {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ec4899, #8b5cf6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #db2777, #7c3aed);
+}
+
+/* Clean Cards Swiper - Premium stacked card carousel */
+.clean-cards-swiper .swiper {
+  overflow: visible;
+}
+
+.clean-cards-swiper .swiper-slide {
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Completely remove ALL shadow layers from cards effect - override inline styles */
+.swiper-slide-shadow-left,
+.swiper-slide-shadow-right,
+.clean-cards-swiper .swiper-slide-shadow-left,
+.clean-cards-swiper .swiper-slide-shadow-right {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Background cards - show only blurred image */
+.clean-cards-swiper .swiper-slide:not(.swiper-slide-active) .card-content {
+  opacity: 0;
+}
+
+.clean-cards-swiper .swiper-slide:not(.swiper-slide-active) .card-image-container {
+  filter: blur(8px) brightness(0.85);
+  transform: scale(0.92);
+  transition: all 0.4s ease;
+}
+
+/* Active card - full content visible */
+.clean-cards-swiper .swiper-slide-active .card-content {
+  opacity: 1;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Clean navigation arrows - simple icon only, no circle */
+.clean-nav-btn {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none;
+  width: 40px !important;
+  height: 40px !important;
+  transition: all 0.3s ease !important;
+}
+
+.clean-nav-btn:hover {
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: scale(1.15);
+}
+
+.clean-nav-btn::after {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #8b5cf6 !important;
+  transition: color 0.3s ease !important;
+}
+
+.clean-nav-btn:hover::after {
+  color: #ec4899 !important;
+}
+
+.clean-nav-btn.swiper-button-disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+.clean-nav-btn.swiper-button-disabled:hover {
+  background: transparent !important;
+  transform: none;
+}
+
+/* Card hover scale for image */
+.hover\\:scale-115:hover {
+  transform: scale(1.15);
+}
