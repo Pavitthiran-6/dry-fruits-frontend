@@ -21,7 +21,7 @@ const ProfileDashboard = () => {
             <div className="min-h-screen pt-24 pb-12 bg-gray-50 flex items-center justify-center">
                 <div className="text-center">
                     <p className="text-gray-600">Please login to view your profile.</p>
-                    <Link to="/login" className="mt-4 inline-block text-purple-600 hover:underline">
+                    <Link to="/login" className="mt-4 inline-block text-amber-600 hover:underline">
                         Go to Login
                     </Link>
                 </div>
@@ -70,7 +70,7 @@ const ProfileDashboard = () => {
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 rounded-2xl p-5 md:p-6 text-white mb-5 md:mb-6"
+                    className="bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 rounded-2xl p-5 md:p-6 text-white mb-5 md:mb-6"
                 >
                     <div className="flex items-center space-x-3 md:space-x-4">
                         <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center overflow-hidden">

@@ -24,7 +24,7 @@ const Wishlist = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50 pt-20 md:pt-24 pb-12 md:pb-16">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100 pt-20 md:pt-24 pb-12 md:pb-16">
             <div className="px-4 sm:px-5 md:px-6 lg:px-8 py-6 md:py-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -92,7 +92,7 @@ const Wishlist = () => {
                                         </button>
                                     </div>
                                     <Link to={`/product/${product.id}`}>
-                                        <h3 className="text-sm md:text-xl font-semibold text-gray-800 mb-1 md:mb-2 hover:text-purple-600 transition-colors line-clamp-1">
+                                        <h3 className="text-sm md:text-xl font-semibold text-gray-800 mb-1 md:mb-2 hover:text-amber-700 transition-colors line-clamp-1">
                                             {product.name}
                                         </h3>
                                     </Link>
@@ -115,7 +115,7 @@ const Wishlist = () => {
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                             onClick={() => handleMoveToCart(product)}
-                                            className={`px-3 md:px-4 py-1.5 md:py-2 rounded-full font-medium shadow-md hover:shadow-lg transition-shadow flex items-center space-x-1 text-xs md:text-sm ${cartItems.some((item) => item.id === product.id) ? 'bg-red-500 text-white' : 'bg-gradient-to-r from-pink-500 to-purple-500 text-white'}`}
+                                            className={`px-3 md:px-4 py-1.5 md:py-2 rounded-full font-medium shadow-md hover:shadow-lg transition-shadow flex items-center space-x-1 text-xs md:text-sm ${cartItems.some((item) => item.id === product.id) ? 'bg-red-500 text-white' : 'bg-gradient-to-r from-amber-700 to-orange-600 text-white'}`}
                                         >
                                             <HiShoppingCart className="w-3 md:w-4 h-3 md:h-4" />
                                             <span>{cartItems.some((item) => item.id === product.id) ? 'Remove' : 'Add to Cart'}</span>

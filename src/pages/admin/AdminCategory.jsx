@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { HiSearch, HiPlus, HiPencil, HiTrash, HiFolder, HiX } from 'react-icons/hi';
+import { HiSearch, HiPlus, HiPencil, HiTrash, HiFolder, HiX, HiUpload } from 'react-icons/hi';
+import { motion, AnimatePresence } from 'framer-motion';
 import { addCategory, deleteCategory, updateCategory } from '../../store/slices/productsSlice';
 
 const AdminCategory = () => {
@@ -9,6 +10,8 @@ const AdminCategory = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
     const [categoryName, setCategoryName] = useState('');
+    const [categoryImage, setCategoryImage] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
     const [editCategory, setEditCategory] = useState(null);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [categoryToDelete, setCategoryToDelete] = useState(null);
@@ -20,20 +23,41 @@ const AdminCategory = () => {
 
     const handleAddCategory = () => {
         if (categoryName.trim()) {
+            const categoryData = {
+                id: editCategory?.id,
+                name: categoryName.trim(),
+                image: imagePreview
+            };
+
             if (editCategory) {
-                dispatch(updateCategory({ oldName: editCategory, newName: categoryName.trim() }));
+                dispatch(updateCategory(categoryData));
             } else {
-                dispatch(addCategory(categoryName.trim()));
+                dispatch(addCategory(categoryData));
             }
-            setCategoryName('');
-            setEditCategory(null);
-            setModalOpen(false);
+            closeModal();
+        }
+    };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Image size exceeds 5MB');
+                return;
+            }
+            setCategoryImage(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
         }
     };
 
     const handleEditClick = (category) => {
         setEditCategory(category);
-        setCategoryName(category);
+        setCategoryName(category.name);
+        setImagePreview(category.image || null);
         setModalOpen(true);
     };
 
@@ -44,7 +68,7 @@ const AdminCategory = () => {
 
     const handleConfirmDelete = () => {
         if (categoryToDelete) {
-            dispatch(deleteCategory(categoryToDelete));
+            dispatch(deleteCategory(categoryToDelete.id));
             setDeleteModalOpen(false);
             setCategoryToDelete(null);
         }
@@ -59,6 +83,8 @@ const AdminCategory = () => {
     const closeModal = () => {
         setModalOpen(false);
         setCategoryName('');
+        setCategoryImage(null);
+        setImagePreview(null);
         setEditCategory(null);
     };
 
@@ -74,7 +100,7 @@ const AdminCategory = () => {
 
                 <button
                     onClick={openAddModal}
-                    className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                    className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
                 >
                     <HiPlus className="w-5 h-5" />
                     <span>Add Category</span>
@@ -90,7 +116,7 @@ const AdminCategory = () => {
                         placeholder="Search categories..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
                 </div>
             </div>
@@ -103,8 +129,8 @@ const AdminCategory = () => {
                             <p className="text-sm text-gray-600">Total Categories</p>
                             <p className="text-2xl font-bold text-gray-800">{categories.length}</p>
                         </div>
-                        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                            <HiFolder className="w-6 h-6 text-purple-600" />
+                        <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
+                            <HiFolder className="w-6 h-6 text-amber-600" />
                         </div>
                     </div>
                 </div>
@@ -157,8 +183,12 @@ const AdminCategory = () => {
                                     <tr key={category.id} className="hover:bg-gray-50">
                                         <td className="px-4 py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                                                    <span className="text-lg">{category.icon}</span>
+                                                <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center overflow-hidden border border-amber-200">
+                                                    {category.image ? (
+                                                        <img src={category.image} alt={category.name} className="w-full h-full object-cover" />
+                                                    ) : (
+                                                        <span className="text-xl text-amber-600">{category.icon}</span>
+                                                    )}
                                                 </div>
                                                 <span className="font-medium text-gray-800">{category.name}</span>
                                             </div>
@@ -182,7 +212,7 @@ const AdminCategory = () => {
                                                     <HiPencil className="w-5 h-5" />
                                                 </button>
                                                 <button
-                                                    onClick={() => handleDeleteClick(category.name)}
+                                                    onClick={() => handleDeleteClick(category)}
                                                     className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                                     title="Delete"
                                                 >
@@ -204,48 +234,105 @@ const AdminCategory = () => {
                 )}
             </div>
 
-            {/* Add/Edit Category Modal */}
-            {modalOpen && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
-                        <div className="flex items-center justify-between p-4 border-b">
-                            <h3 className="text-lg font-semibold text-gray-800">
-                                {editCategory ? 'Edit Category' : 'Add Category'}
-                            </h3>
-                            <button onClick={closeModal} className="p-1 hover:bg-gray-100 rounded-lg">
-                                <HiX className="w-5 h-5 text-gray-500" />
-                            </button>
-                        </div>
-                        <div className="p-4">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Category Name
-                            </label>
-                            <input
-                                type="text"
-                                value={categoryName}
-                                onChange={(e) => setCategoryName(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && handleAddCategory()}
-                                placeholder="Enter category name"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                            />
-                        </div>
-                        <div className="flex gap-3 p-4 border-t">
-                            <button
-                                onClick={closeModal}
-                                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                onClick={handleAddCategory}
-                                className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-                            >
-                                {editCategory ? 'Update' : 'Add'}
-                            </button>
-                        </div>
+            <AnimatePresence>
+                {modalOpen && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={closeModal}
+                            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+                        >
+                            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                                <h3 className="text-xl font-bold text-gray-800">
+                                    {editCategory ? 'Edit Category' : 'Add New Category'}
+                                </h3>
+                                <button 
+                                    onClick={closeModal}
+                                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                >
+                                    <HiX className="w-5 h-5 text-gray-500" />
+                                </button>
+                            </div>
+
+                            <div className="p-6 space-y-6">
+                                {/* Name Field */}
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Category Name <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={categoryName}
+                                        onChange={(e) => setCategoryName(e.target.value)}
+                                        placeholder="e.g. Dairy Products"
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-4 focus:ring-amber-500/10 focus:border-amber-500 transition-all outline-none"
+                                        required
+                                    />
+                                </div>
+
+                                {/* Image Upload */}
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Category Image
+                                    </label>
+                                    <div className="relative group">
+                                        <input
+                                            type="file"
+                                            accept="image/png, image/jpeg"
+                                            onChange={handleImageChange}
+                                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                                        />
+                                        <div className={`
+                                            w-full h-40 border-2 border-dashed rounded-xl flex flex-col items-center justify-center transition-all overflow-hidden
+                                            ${imagePreview ? 'border-amber-500 bg-amber-50' : 'border-gray-200 group-hover:border-amber-400 bg-gray-50 group-hover:bg-amber-50/30'}
+                                        `}>
+                                            {imagePreview ? (
+                                                <div className="relative w-full h-full">
+                                                    <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 flex items-center justify-center transition-all">
+                                                        <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-all">Change Image</span>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                                        <HiUpload className="w-6 h-6 text-amber-600" />
+                                                    </div>
+                                                    <p className="text-sm font-medium text-gray-600">Upload Category Image</p>
+                                                    <p className="text-xs text-gray-400 mt-1">PNG, JPG up to 5MB</p>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="p-6 bg-gray-50 flex gap-4">
+                                <button
+                                    onClick={closeModal}
+                                    className="flex-1 px-4 py-3 text-sm font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors shadow-sm"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={handleAddCategory}
+                                    className="flex-1 px-4 py-3 text-sm font-semibold text-white bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl hover:shadow-lg hover:shadow-amber-600/20 active:scale-95 transition-all"
+                                >
+                                    {editCategory ? 'Save Changes' : 'Create Category'}
+                                </button>
+                            </div>
+                        </motion.div>
                     </div>
-                </div>
-            )}
+                )}
+            </AnimatePresence>
 
             {/* Delete Confirmation Modal */}
             {deleteModalOpen && (
@@ -257,7 +344,7 @@ const AdminCategory = () => {
                             </div>
                             <h3 className="text-lg font-semibold text-gray-800 mb-2">Delete Category</h3>
                             <p className="text-gray-600">
-                                Are you sure you want to delete "{categoryToDelete}"? This action cannot be undone.
+                                Are you sure you want to delete "{categoryToDelete?.name}"? This action cannot be undone.
                             </p>
                         </div>
                         <div className="flex gap-3 p-4 border-t">

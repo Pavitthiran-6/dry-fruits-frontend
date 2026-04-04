@@ -88,13 +88,24 @@ const AddEditProduct = () => {
 
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
-        if (files.length > 0) {
+        const MAX_IMAGES = 10;
+        const currentCount = formData.images.length;
+        const remainingSlots = MAX_IMAGES - currentCount;
+
+        if (remainingSlots <= 0) {
+            alert(`You can only upload up to ${MAX_IMAGES} images.`);
+            return;
+        }
+
+        const filesToProcess = files.slice(0, remainingSlots);
+
+        if (filesToProcess.length > 0) {
             const newImages = [];
-            files.forEach(file => {
+            filesToProcess.forEach(file => {
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     newImages.push(reader.result);
-                    if (newImages.length === files.length) {
+                    if (newImages.length === filesToProcess.length) {
                         setFormData(prev => ({
                             ...prev,
                             images: [...prev.images, ...newImages]
@@ -175,7 +186,7 @@ const AddEditProduct = () => {
             <div className="mb-6">
                 <button
                     onClick={handleCancel}
-                    className="flex items-center text-gray-600 hover:text-purple-600 transition-colors mb-4"
+                    className="flex items-center text-gray-600 hover:text-amber-600 transition-colors mb-4"
                 >
                     <HiArrowLeft className="w-5 h-5 mr-1" />
                     Back to Inventory
@@ -184,7 +195,7 @@ const AddEditProduct = () => {
                     {isEditMode ? 'Edit Product' : 'Add New Product'}
                 </h1>
                 <p className="text-gray-600">
-                    {isEditMode ? 'Update product information' : 'Add a new product to your inventory'}
+                    {isEditMode ? 'Update product information (max 10 images)' : 'Add a new product to your inventory (max 10 images)'}
                 </p>
             </div>
 
@@ -204,7 +215,7 @@ const AddEditProduct = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
-                                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 ${errors.name ? 'border-red-500' : 'border-gray-200'
+                                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${errors.name ? 'border-red-500' : 'border-gray-200'
                                         }`}
                                     placeholder="Enter product name"
                                 />
@@ -220,7 +231,7 @@ const AddEditProduct = () => {
                                     <button
                                         type="button"
                                         onClick={() => setCategoryDropdownOpen(!categoryDropdownOpen)}
-                                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 flex items-center justify-between ${errors.category ? 'border-red-500' : 'border-gray-200'}`}
+                                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 flex items-center justify-between ${errors.category ? 'border-red-500' : 'border-gray-200'}`}
                                     >
                                         <span className={formData.category ? 'text-gray-800' : 'text-gray-400'}>
                                             {selectedCategory ? (
@@ -243,7 +254,7 @@ const AddEditProduct = () => {
                                                         placeholder="Search categories..."
                                                         value={categorySearch}
                                                         onChange={(e) => setCategorySearch(e.target.value)}
-                                                        className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                                                        className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                                                         autoFocus
                                                     />
                                                 </div>
@@ -253,10 +264,16 @@ const AddEditProduct = () => {
                                                     key={cat.id}
                                                     type="button"
                                                     onClick={() => handleCategorySelect(cat.name)}
-                                                    className={`w-full px-4 py-2 text-left hover:bg-purple-50 flex items-center gap-2 ${formData.category === cat.name ? 'bg-purple-100' : ''}`}
+                                                    className={`w-full px-4 py-2 text-left hover:bg-amber-50 flex items-center gap-2 ${formData.category === cat.name ? 'bg-amber-100' : ''}`}
                                                 >
-                                                    <span>{cat.icon}</span>
-                                                    <span className="text-gray-800">{cat.name}</span>
+                                                    <div className="w-8 h-8 rounded-lg overflow-hidden bg-amber-100 flex items-center justify-center border border-amber-200">
+                                                        {cat.image ? (
+                                                            <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
+                                                        ) : (
+                                                            <span>{cat.icon}</span>
+                                                        )}
+                                                    </div>
+                                                    <span className="text-gray-800 font-medium">{cat.name}</span>
                                                 </button>
                                             ))}
                                             {filteredCategories.length === 0 && (
@@ -280,7 +297,7 @@ const AddEditProduct = () => {
                                         value={formData.price}
                                         onChange={handleChange}
                                         onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
-                                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 ${errors.price ? 'border-red-500' : 'border-gray-200'
+                                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${errors.price ? 'border-red-500' : 'border-gray-200'
                                             }`}
                                         placeholder="0"
                                         min="0"
@@ -298,7 +315,7 @@ const AddEditProduct = () => {
                                         value={formData.stock}
                                         onChange={handleChange}
                                         onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
-                                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 ${errors.stock ? 'border-red-500' : 'border-gray-200'
+                                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${errors.stock ? 'border-red-500' : 'border-gray-200'
                                             }`}
                                         placeholder="0"
                                         min="0"
@@ -316,7 +333,7 @@ const AddEditProduct = () => {
                                     name="status"
                                     value={formData.status}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
                                 >
                                     <option value="In Stock">In Stock</option>
                                     <option value="Out of Stock">Out of Stock</option>
@@ -331,7 +348,7 @@ const AddEditProduct = () => {
                                     id="isFeatured"
                                     checked={formData.isFeatured}
                                     onChange={handleChange}
-                                    className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                                    className="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500"
                                 />
                                 <label htmlFor="isFeatured" className="ml-2 text-sm text-gray-700">
                                     Mark as Featured Product
@@ -343,9 +360,14 @@ const AddEditProduct = () => {
                         <div className="space-y-6">
                             {/* Product Images - Multiple Upload */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Product Images (Multiple)
-                                </label>
+                                <div className="flex justify-between items-center mb-1">
+                                    <label className="block text-sm font-medium text-gray-700">
+                                        Product Images (max 10)
+                                    </label>
+                                    <span className="text-sm text-gray-500">
+                                        {formData.images.length}/10
+                                    </span>
+                                </div>
                                 <div className="border-2 border-dashed border-gray-200 rounded-lg p-4">
                                     {/* Image Previews */}
                                     {formData.images.length > 0 && (
@@ -370,20 +392,27 @@ const AddEditProduct = () => {
                                     )}
 
                                     {/* Upload Button */}
-                                    <label className="cursor-pointer">
-                                        <div className="flex flex-col items-center py-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-purple-400 transition-colors">
-                                            <HiPhotograph className="w-10 h-10 text-gray-400 mb-2" />
-                                            <p className="text-sm text-gray-500">Click to upload images</p>
-                                            <p className="text-xs text-gray-400 mt-1">PNG, JPG up to 5MB each</p>
+                                    {formData.images.length >= 10 ? (
+                                        <div className="flex flex-col items-center py-4 text-gray-400">
+                                            <HiPhotograph className="w-10 h-10 mb-2" />
+                                            <p className="text-sm">Maximum 10 images reached</p>
                                         </div>
-                                        <input
-                                            type="file"
-                                            accept="image/*"
-                                            multiple
-                                            onChange={handleImageChange}
-                                            className="hidden"
-                                        />
-                                    </label>
+                                    ) : (
+                                        <label className="cursor-pointer">
+                                            <div className="flex flex-col items-center py-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-amber-400 transition-colors">
+                                                <HiPhotograph className="w-10 h-10 text-gray-400 mb-2" />
+                                                <p className="text-sm text-gray-500">Click to upload images</p>
+                                                <p className="text-xs text-gray-400 mt-1">PNG, JPG up to 5MB each (max 10)</p>
+                                            </div>
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                multiple
+                                                onChange={handleImageChange}
+                                                className="hidden"
+                                            />
+                                        </label>
+                                    )}
                                 </div>
                             </div>
 
@@ -397,7 +426,7 @@ const AddEditProduct = () => {
                                     value={formData.description}
                                     onChange={handleChange}
                                     rows={5}
-                                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 ${errors.description ? 'border-red-500' : 'border-gray-200'
+                                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${errors.description ? 'border-red-500' : 'border-gray-200'
                                         }`}
                                     placeholder="Enter product description"
                                 />
@@ -419,7 +448,7 @@ const AddEditProduct = () => {
                             type="submit"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                            className="px-6 py-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all font-semibold"
                         >
                             {isEditMode ? 'Update Product' : 'Save Product'}
                         </motion.button>

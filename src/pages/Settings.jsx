@@ -78,7 +78,7 @@ const Settings = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50 pt-20 md:pt-24 pb-12 md:pb-16">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100 pt-20 md:pt-24 pb-12 md:pb-16">
             <div className="px-4 sm:px-5 md:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -92,7 +92,7 @@ const Settings = () => {
                         <button
                             onClick={() => setActiveTab('password')}
                             className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-medium transition-colors whitespace-nowrap text-sm md:text-base ${activeTab === 'password'
-                                ? 'bg-gradient-to-r from-pink-500 to-purple-500 text-white'
+                                ? 'bg-gradient-to-r from-amber-700 to-orange-600 text-white'
                                 : 'bg-white text-gray-600 hover:bg-gray-100'
                                 }`}
                         >
@@ -101,7 +101,7 @@ const Settings = () => {
                         <button
                             onClick={() => setActiveTab('notifications')}
                             className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-medium transition-colors whitespace-nowrap text-sm md:text-base ${activeTab === 'notifications'
-                                ? 'bg-gradient-to-r from-pink-500 to-purple-500 text-white'
+                                ? 'bg-gradient-to-r from-amber-700 to-orange-600 text-white'
                                 : 'bg-white text-gray-600 hover:bg-gray-100'
                                 }`}
                         >
@@ -136,7 +136,7 @@ const Settings = () => {
                                             name="currentPassword"
                                             value={passwordData.currentPassword}
                                             onChange={handlePasswordChange}
-                                            className="w-full pl-12 md:pl-14 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm md:text-base"
+                                            className="w-full pl-12 md:pl-14 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm md:text-base"
                                             placeholder="Enter current password"
                                         />
                                     </div>
@@ -152,7 +152,7 @@ const Settings = () => {
                                             name="newPassword"
                                             value={passwordData.newPassword}
                                             onChange={handlePasswordChange}
-                                            className="w-full pl-12 md:pl-14 pr-14 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm md:text-base"
+                                            className="w-full pl-12 md:pl-14 pr-14 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm md:text-base"
                                             placeholder="Enter new password"
                                         />
                                         <button
@@ -200,7 +200,7 @@ const Settings = () => {
                                             name="confirmPassword"
                                             value={passwordData.confirmPassword}
                                             onChange={handlePasswordChange}
-                                            className="w-full pl-12 md:pl-14 pr-14 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm md:text-base"
+                                            className="w-full pl-12 md:pl-14 pr-14 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm md:text-base"
                                             placeholder="Confirm new password"
                                         />
                                         <button
@@ -223,7 +223,7 @@ const Settings = () => {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     type="submit"
-                                    className="w-full py-3 md:py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 text-white text-base md:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow mt-2"
+                                    className="w-full py-3 md:py-4 bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 text-white text-base md:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow mt-2"
                                 >
                                     Update Password
                                 </motion.button>
@@ -253,7 +253,7 @@ const Settings = () => {
                                             <span className="text-sm md:text-base text-gray-700">Email Notifications</span>
                                             <div
                                                 onClick={() => handleNotificationChange('email')}
-                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.email ? 'bg-purple-500' : 'bg-gray-300'}`}
+                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.email ? 'bg-amber-500' : 'bg-gray-300'}`}
                                             >
                                                 <div className={`w-4 h-4 bg-white rounded-full shadow-md transition-transform ${notifications.email ? 'translate-x-6' : ''}`} />
                                             </div>
@@ -262,7 +262,7 @@ const Settings = () => {
                                             <span className="text-sm md:text-base text-gray-700">SMS Notifications</span>
                                             <div
                                                 onClick={() => handleNotificationChange('sms')}
-                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.sms ? 'bg-purple-500' : 'bg-gray-300'}`}
+                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.sms ? 'bg-amber-500' : 'bg-gray-300'}`}
                                             >
                                                 <div className={`w-4 h-4 bg-white rounded-full shadow-md transition-transform ${notifications.sms ? 'translate-x-6' : ''}`} />
                                             </div>
@@ -271,7 +271,7 @@ const Settings = () => {
                                             <span className="text-sm md:text-base text-gray-700">Push Notifications</span>
                                             <div
                                                 onClick={() => handleNotificationChange('push')}
-                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.push ? 'bg-purple-500' : 'bg-gray-300'}`}
+                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.push ? 'bg-amber-500' : 'bg-gray-300'}`}
                                             >
                                                 <div className={`w-4 h-4 bg-white rounded-full shadow-md transition-transform ${notifications.push ? 'translate-x-6' : ''}`} />
                                             </div>
@@ -287,7 +287,7 @@ const Settings = () => {
                                             <span className="text-sm md:text-base text-gray-700">Order Updates</span>
                                             <div
                                                 onClick={() => handleNotificationChange('orderUpdates')}
-                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.orderUpdates ? 'bg-purple-500' : 'bg-gray-300'}`}
+                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.orderUpdates ? 'bg-amber-500' : 'bg-gray-300'}`}
                                             >
                                                 <div className={`w-4 h-4 bg-white rounded-full shadow-md transition-transform ${notifications.orderUpdates ? 'translate-x-6' : ''}`} />
                                             </div>
@@ -296,7 +296,7 @@ const Settings = () => {
                                             <span className="text-sm md:text-base text-gray-700">Promotional Emails</span>
                                             <div
                                                 onClick={() => handleNotificationChange('promotional')}
-                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.promotional ? 'bg-purple-500' : 'bg-gray-300'}`}
+                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${notifications.promotional ? 'bg-amber-500' : 'bg-gray-300'}`}
                                             >
                                                 <div className={`w-4 h-4 bg-white rounded-full shadow-md transition-transform ${notifications.promotional ? 'translate-x-6' : ''}`} />
                                             </div>

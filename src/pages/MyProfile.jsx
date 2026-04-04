@@ -176,7 +176,7 @@ const MyProfile = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50 pt-20 md:pt-24 pb-12 md:pb-16">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100 pt-20 md:pt-24 pb-12 md:pb-16">
             <div className="px-4 sm:px-5 md:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -188,7 +188,7 @@ const MyProfile = () => {
                         <div className="text-center mb-8">
                             {/* Avatar Section */}
                             <div className="relative inline-block">
-                                <div className="w-24 h-24 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                                <div className="w-24 h-24 rounded-full bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 flex items-center justify-center mx-auto mb-4 overflow-hidden">
                                     {uploadedImage ? (
                                         <img src={uploadedImage} alt="Profile" className="w-full h-full object-cover" />
                                     ) : selectedAvatar ? (
@@ -201,7 +201,7 @@ const MyProfile = () => {
                                 </div>
                                 <button
                                     onClick={handleUpdateAvatar}
-                                    className="absolute bottom-4 right-0 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white shadow-lg hover:bg-purple-600 transition-colors"
+                                    className="absolute bottom-4 right-0 w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-white shadow-lg hover:bg-amber-600 transition-colors"
                                 >
                                     <HiCamera className="w-4 h-4" />
                                 </button>
@@ -221,7 +221,7 @@ const MyProfile = () => {
                                                 key={avatar}
                                                 onClick={() => handleAvatarSelect(avatar)}
                                                 className={`text-3xl p-2 rounded-xl transition-colors ${selectedAvatar === avatar && !uploadedImage
-                                                    ? 'bg-purple-100 ring-2 ring-purple-500'
+                                                    ? 'bg-amber-100 ring-2 ring-amber-600'
                                                     : 'hover:bg-gray-100'
                                                     }`}
                                             >
@@ -276,7 +276,7 @@ const MyProfile = () => {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full pl-12 md:pl-14 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm"
+                                        className="w-full pl-12 md:pl-14 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm"
                                         placeholder="Enter your full name"
                                     />
                                 </div>
@@ -311,7 +311,7 @@ const MyProfile = () => {
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        className="w-full pl-16 md:pl-20 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm"
+                                        className="w-full pl-16 md:pl-20 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm"
                                         placeholder="Enter your phone number"
                                     />
                                 </div>
@@ -330,7 +330,7 @@ const MyProfile = () => {
                                     <button
                                         type="button"
                                         onClick={() => setShowAddressForm(!showAddressForm)}
-                                        className="w-full sm:w-auto flex items-center justify-center px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-lg hover:from-pink-600 hover:to-purple-600 transition-colors text-sm"
+                                        className="w-full sm:w-auto flex items-center justify-center px-4 py-2 bg-gradient-to-r from-amber-700 to-orange-600 text-white rounded-lg hover:from-pink-600 hover:to-orange-600 transition-colors text-sm"
                                     >
                                         <HiPlus className="w-5 h-5 mr-1" />
                                         Add Address
@@ -352,7 +352,7 @@ const MyProfile = () => {
                                                         name="type"
                                                         value={newAddress.type}
                                                         onChange={handleAddressChange}
-                                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors bg-white text-sm"
+                                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors bg-white text-sm"
                                                     >
                                                         <option value="Home">Home</option>
                                                         <option value="Office">Office</option>
@@ -366,7 +366,7 @@ const MyProfile = () => {
                                                         name="pincode"
                                                         value={newAddress.pincode}
                                                         onChange={handleAddressChange}
-                                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm"
+                                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm"
                                                         placeholder="400001"
                                                     />
                                                 </div>
@@ -378,7 +378,7 @@ const MyProfile = () => {
                                                     name="street"
                                                     value={newAddress.street}
                                                     onChange={handleAddressChange}
-                                                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm"
+                                                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm"
                                                     placeholder="House No., Building Name, Street"
                                                 />
                                             </div>
@@ -390,7 +390,7 @@ const MyProfile = () => {
                                                         name="city"
                                                         value={newAddress.city}
                                                         onChange={handleAddressChange}
-                                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm"
+                                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm"
                                                         placeholder="Mumbai"
                                                     />
                                                 </div>
@@ -401,7 +401,7 @@ const MyProfile = () => {
                                                         name="state"
                                                         value={newAddress.state}
                                                         onChange={handleAddressChange}
-                                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm"
+                                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm"
                                                         placeholder="Maharashtra"
                                                     />
                                                 </div>
@@ -412,7 +412,7 @@ const MyProfile = () => {
                                                     name="isDefault"
                                                     checked={newAddress.isDefault}
                                                     onChange={(e) => setNewAddress({ ...newAddress, isDefault: e.target.checked })}
-                                                    className="w-5 h-5 text-purple-500 rounded focus:ring-purple-500"
+                                                    className="w-5 h-5 text-amber-600 rounded focus:ring-amber-600"
                                                 />
                                                 <span className="ml-2 text-sm text-gray-700">Set as default address</span>
                                             </label>
@@ -421,7 +421,7 @@ const MyProfile = () => {
                                                     whileHover={{ scale: 1.02 }}
                                                     whileTap={{ scale: 0.98 }}
                                                     type="submit"
-                                                    className="w-full sm:flex-1 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-medium rounded-lg"
+                                                    className="w-full sm:flex-1 py-3 bg-gradient-to-r from-amber-700 to-orange-600 text-white font-medium rounded-lg"
                                                 >
                                                     Add Address
                                                 </motion.button>
@@ -444,16 +444,16 @@ const MyProfile = () => {
                                             key={address.id}
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className={`relative p-4 md:p-5 rounded-2xl border-2 transition-colors ${address.isDefault ? 'border-purple-400 bg-purple-50' : 'border-gray-100 bg-white'
+                                            className={`relative p-4 md:p-5 rounded-2xl border-2 transition-colors ${address.isDefault ? 'border-amber-600 bg-amber-50' : 'border-gray-100 bg-white'
                                                 }`}
                                         >
                                             {address.isDefault && (
-                                                <span className="absolute top-3 right-3 px-2 py-1 bg-purple-500 text-white text-xs font-medium rounded-full">
+                                                <span className="absolute top-3 right-3 px-2 py-1 bg-amber-500 text-white text-xs font-medium rounded-full">
                                                     Default
                                                 </span>
                                             )}
                                             <div className="flex items-start gap-3">
-                                                <HiLocationMarker className="w-5 h-5 text-purple-500 mt-1" />
+                                                <HiLocationMarker className="w-5 h-5 text-amber-600 mt-1" />
                                                 <div className="flex-1">
                                                     <p className="font-medium text-gray-800">{address.type}</p>
                                                     <p className="text-gray-600 text-sm mt-1">{address.street}</p>
@@ -464,7 +464,7 @@ const MyProfile = () => {
                                                 {!address.isDefault && (
                                                     <button
                                                         onClick={() => handleSetDefault(address.id)}
-                                                        className="text-sm text-purple-600 hover:text-purple-700 font-medium"
+                                                        className="text-sm text-amber-600 hover:text-amber-700 font-medium"
                                                     >
                                                         Set Default
                                                     </button>
@@ -494,7 +494,7 @@ const MyProfile = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 type="submit"
-                                className="w-full py-3 md:py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 text-white text-base md:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow mt-2"
+                                className="w-full py-3 md:py-4 bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 text-white text-base md:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow mt-2"
                             >
                                 Save Changes
                             </motion.button>

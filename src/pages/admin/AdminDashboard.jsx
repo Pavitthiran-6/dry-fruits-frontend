@@ -44,8 +44,8 @@ const AdminDashboard = () => {
 
     const stats = [
         { title: 'Total Revenue', value: revenue > 0 ? revenue.toString() : '--', color: 'from-green-500 to-emerald-500' },
-        { title: 'Total Orders', value: ordersCount > 0 ? ordersCount.toString() : '--', color: 'from-blue-500 to-cyan-500' },
-        { title: 'Customers', value: customersCount > 0 ? customersCount.toString() : '--', color: 'from-purple-500 to-pink-500' },
+        { title: 'Total Orders', value: ordersCount > 0 ? ordersCount.toString() : '--', color: 'from-amber-600 to-orange-500' },
+        { title: 'Customers', value: customersCount > 0 ? customersCount.toString() : '--', color: 'from-amber-600 to-orange-500' },
         { title: 'Avg Rating', value: rating > 0 ? rating.toFixed(1) : '--', color: 'from-yellow-500 to-orange-500' },
     ];
 
@@ -109,7 +109,7 @@ const AdminDashboard = () => {
                             {topProducts.map((product, index) => (
                                 <div key={product.name} className="flex items-center justify-between py-3 border-b border-gray-100">
                                     <div className="flex items-center gap-3">
-                                        <span className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 font-bold">
+                                        <span className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600 font-bold">
                                             {index + 1}
                                         </span>
                                         <div>
@@ -117,7 +117,7 @@ const AdminDashboard = () => {
                                             <p className="text-sm text-gray-500">{product.sold} sold</p>
                                         </div>
                                     </div>
-                                    <p className="font-semibold text-purple-600">{product.revenue}</p>
+                                    <p className="font-semibold text-amber-600">{product.revenue}</p>
                                 </div>
                             ))}
                         </div>

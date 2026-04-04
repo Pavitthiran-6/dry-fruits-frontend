@@ -24,7 +24,7 @@ const Cart = () => {
     const grandTotal = totalPrice + shipping;
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50 pt-20 md:pt-24 pb-12 md:pb-16">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100 pt-20 md:pt-24 pb-12 md:pb-16">
             <div className="px-4 sm:px-5 md:px-6 lg:px-8 py-6 md:py-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -120,7 +120,7 @@ const Cart = () => {
                                 </button>
                                 <Link
                                     to="/products"
-                                    className="text-purple-600 hover:text-purple-700 font-medium transition-colors text-sm md:text-base"
+                                    className="text-amber-600 hover:text-amber-700 font-medium transition-colors text-sm md:text-base"
                                 >
                                     Continue Shopping
                                 </Link>
@@ -167,7 +167,7 @@ const Cart = () => {
 
                                 <Link
                                     to="/checkout"
-                                    className="block w-full py-3 md:py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 text-white text-center text-base md:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                                    className="block w-full py-3 md:py-4 bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 text-white text-center text-base md:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow"
                                 >
                                     Proceed to Checkout
                                 </Link>

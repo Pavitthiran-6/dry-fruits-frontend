@@ -28,7 +28,7 @@ const AdminCustomers = () => {
                         placeholder="Search by Name or Email"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-12 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full pl-12 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
                     />
                 </div>
             </div>
@@ -43,8 +43,8 @@ const AdminCustomers = () => {
                             className="bg-white rounded-xl shadow-sm p-6"
                         >
                             <div className="flex items-center mb-4">
-                                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                                    <span className="text-purple-600 font-bold text-lg">
+                                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
+                                    <span className="text-amber-600 font-bold text-lg">
                                         {customer.name ? customer.name.charAt(0) : '?'}
                                     </span>
                                 </div>
@@ -71,7 +71,7 @@ const AdminCustomers = () => {
 
                             <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between">
                                 <div className="text-center">
-                                    <p className="text-lg font-bold text-purple-600">{customer.orders}</p>
+                                    <p className="text-lg font-bold text-amber-600">{customer.orders}</p>
                                     <p className="text-xs text-gray-500">Orders</p>
                                 </div>
                                 <div className="text-center">

@@ -58,7 +58,7 @@ const Checkout = () => {
 
     if (items.length === 0 && !orderPlaced) {
         return (
-            <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50 pt-20 md:pt-24 pb-12 md:py-16">
+            <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100 pt-20 md:pt-24 pb-12 md:py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
                     <div className="text-5xl md:text-8xl mb-4 md:mb-6">🛒</div>
                     <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Your cart is empty</h2>
@@ -72,7 +72,7 @@ const Checkout = () => {
 
     if (orderPlaced) {
         return (
-            <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50 pt-20 md:pt-24 pb-12 md:py-16">
+            <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100 pt-20 md:pt-24 pb-12 md:py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
@@ -112,7 +112,7 @@ const Checkout = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50 pt-20 md:pt-24 pb-12 md:pb-16">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100 pt-20 md:pt-24 pb-12 md:pb-16">
             <div className="px-4 sm:px-5 md:px-6 lg:px-8 py-6 md:py-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -130,7 +130,7 @@ const Checkout = () => {
                         {steps.map((step, index) => (
                             <div key={step.number} className="flex items-center gap-1 md:gap-3">
                                 <div className={`flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full transition-colors ${currentStep >= step.number
-                                    ? 'bg-gradient-to-r from-pink-500 to-purple-500 text-white'
+                                    ? 'bg-gradient-to-r from-amber-700 to-orange-600 text-white'
                                     : 'bg-gray-200 text-gray-500'
                                     }`}>
                                     {currentStep > step.number ? (
@@ -145,7 +145,7 @@ const Checkout = () => {
                                 </span>
                                 {index < steps.length - 1 && (
                                     <div className={`w-6 md:w-16 h-0.5 md:h-1 mx-1 md:mx-4 rounded ${currentStep > step.number
-                                        ? 'bg-gradient-to-r from-pink-500 to-purple-500'
+                                        ? 'bg-gradient-to-r from-amber-700 to-orange-600'
                                         : 'bg-gray-200'
                                         }`} />
                                 )}
@@ -175,7 +175,7 @@ const Checkout = () => {
                                                 name="name"
                                                 value={formData.name}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors"
+                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors"
                                                 placeholder="John Doe"
                                             />
                                         </div>
@@ -186,7 +186,7 @@ const Checkout = () => {
                                                 name="email"
                                                 value={formData.email}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors"
+                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors"
                                                 placeholder="john@example.com"
                                             />
                                         </div>
@@ -197,7 +197,7 @@ const Checkout = () => {
                                                 name="phone"
                                                 value={formData.phone}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors"
+                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors"
                                                 placeholder="+91 98765 43210"
                                             />
                                         </div>
@@ -208,7 +208,7 @@ const Checkout = () => {
                                                 name="pincode"
                                                 value={formData.pincode}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors"
+                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors"
                                                 placeholder="400001"
                                             />
                                         </div>
@@ -219,7 +219,7 @@ const Checkout = () => {
                                                 name="address"
                                                 value={formData.address}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors"
+                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors"
                                                 placeholder="123 Main Street"
                                             />
                                         </div>
@@ -230,7 +230,7 @@ const Checkout = () => {
                                                 name="city"
                                                 value={formData.city}
                                                 onChange={handleInputChange}
-                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors"
+                                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors"
                                                 placeholder="Mumbai"
                                             />
                                         </div>
@@ -253,42 +253,42 @@ const Checkout = () => {
                                 >
                                     <h2 className="text-2xl font-bold text-gray-800 mb-6">Payment Method</h2>
                                     <div className="space-y-4">
-                                        <label className="flex items-center p-4 border-2 border-purple-400 rounded-xl cursor-pointer bg-purple-50">
+                                        <label className="flex items-center p-4 border-2 border-amber-600 rounded-xl cursor-pointer bg-amber-50">
                                             <input
                                                 type="radio"
                                                 name="paymentMethod"
                                                 value="card"
                                                 checked={formData.paymentMethod === 'card'}
                                                 onChange={handleInputChange}
-                                                className="w-5 h-5 text-purple-600"
+                                                className="w-5 h-5 text-amber-600"
                                             />
                                             <div className="ml-4">
                                                 <span className="font-medium">Credit/Debit Card</span>
                                                 <p className="text-sm text-gray-500">Pay securely with your card</p>
                                             </div>
                                         </label>
-                                        <label className="flex items-center p-4 border-2 border-gray-100 rounded-xl cursor-pointer hover:border-purple-200 transition-colors">
+                                        <label className="flex items-center p-4 border-2 border-gray-100 rounded-xl cursor-pointer hover:border-amber-200 transition-colors">
                                             <input
                                                 type="radio"
                                                 name="paymentMethod"
                                                 value="upi"
                                                 checked={formData.paymentMethod === 'upi'}
                                                 onChange={handleInputChange}
-                                                className="w-5 h-5 text-purple-600"
+                                                className="w-5 h-5 text-amber-600"
                                             />
                                             <div className="ml-4">
                                                 <span className="font-medium">UPI</span>
                                                 <p className="text-sm text-gray-500">Pay using UPI apps</p>
                                             </div>
                                         </label>
-                                        <label className="flex items-center p-4 border-2 border-gray-100 rounded-xl cursor-pointer hover:border-purple-200 transition-colors">
+                                        <label className="flex items-center p-4 border-2 border-gray-100 rounded-xl cursor-pointer hover:border-amber-200 transition-colors">
                                             <input
                                                 type="radio"
                                                 name="paymentMethod"
                                                 value="cod"
                                                 checked={formData.paymentMethod === 'cod'}
                                                 onChange={handleInputChange}
-                                                className="w-5 h-5 text-purple-600"
+                                                className="w-5 h-5 text-amber-600"
                                             />
                                             <div className="ml-4">
                                                 <span className="font-medium">Cash on Delivery</span>

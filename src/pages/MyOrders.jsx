@@ -62,7 +62,7 @@ const MyOrders = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50 pt-20 md:pt-24 pb-12 md:pb-16">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100 pt-20 md:pt-24 pb-12 md:pb-16">
             <div className="px-4 sm:px-5 md:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -80,7 +80,7 @@ const MyOrders = () => {
                             <p className="text-gray-500 text-sm md:text-base mb-5 md:mb-6">Start shopping to see your orders here</p>
                             <Link
                                 to="/products"
-                                className="inline-block px-5 md:px-6 py-2 md:py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-medium rounded-full hover:from-pink-600 hover:to-purple-600 transition-all text-sm md:text-base"
+                                className="inline-block px-5 md:px-6 py-2 md:py-3 bg-gradient-to-r from-amber-700 to-orange-600 text-white font-medium rounded-full hover:from-amber-700 hover:to-orange-600 transition-all text-sm md:text-base"
                             >
                                 Browse Products
                             </Link>
@@ -128,11 +128,11 @@ const MyOrders = () => {
                                                             Qty: {product.quantity}
                                                         </span>
                                                         <span className="text-gray-400">|</span>
-                                                        <span className="text-lg md:text-xl font-bold text-purple-600">
+                                                        <span className="text-lg md:text-xl font-bold text-amber-600">
                                                             ₹{order.total || order.totalPrice || product.price * product.quantity}
                                                         </span>
                                                     </div>
-                                                    <button className="flex items-center gap-1.5 md:gap-2 text-purple-600 hover:text-purple-700 font-medium transition-colors text-sm">
+                                                    <button className="flex items-center gap-1.5 md:gap-2 text-amber-600 hover:text-amber-700 font-medium transition-colors text-sm">
                                                         View Details
                                                         <HiExternalLink className="w-4 h-4" />
                                                     </button>

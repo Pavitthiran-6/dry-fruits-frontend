@@ -15,6 +15,27 @@ const saveProductsToStorage = (products) => {
   localStorage.setItem('admin_products', JSON.stringify(products));
 };
 
+// Default categories with placeholder images
+const DEFAULT_CATEGORIES = [
+  { id: 'almonds', name: 'Almonds', icon: '🥜', image: 'https://images.unsplash.com/photo-1508061253366-f7da158b6d46?w=500&h=500&fit=crop', gradient: 'from-amber-600 to-orange-600' },
+  { id: 'cashews', name: 'Cashews', icon: '🌰', image: 'https://images.unsplash.com/photo-1558231332-9cbdd5174ea8?w=500&h=500&fit=crop', gradient: 'from-amber-600 to-orange-600' },
+  { id: 'pistachios', name: 'Pistachios', icon: '🫘', image: 'https://images.unsplash.com/photo-1543233630-10499d63c480?w=500&h=500&fit=crop', gradient: 'from-amber-600 to-orange-600' },
+  { id: 'walnuts', name: 'Walnuts', icon: '🍂', image: 'https://images.unsplash.com/photo-1589667820091-5df63adcc97a?w=500&h=500&fit=crop', gradient: 'from-amber-600 to-orange-600' },
+  { id: 'mixed-nuts', name: 'Mixed Nuts', icon: '🍇', image: 'https://images.unsplash.com/photo-1623428454614-abaf00244e52?w=500&h=500&fit=crop', gradient: 'from-amber-600 to-orange-600' },
+];
+
+const loadCategoriesFromStorage = () => {
+  const stored = localStorage.getItem('dry_fruits_categories');
+  if (stored) {
+    return JSON.parse(stored);
+  }
+  return DEFAULT_CATEGORIES;
+};
+
+const saveCategoriesToStorage = (categories) => {
+  localStorage.setItem('dry_fruits_categories', JSON.stringify(categories));
+};
+
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {
@@ -28,18 +49,14 @@ export const fetchProducts = createAsyncThunk(
 const initialState = {
   products: [],
   featuredProducts: [],
-  categories: [
-    { id: 1, name: 'Almonds', icon: '🥜', gradient: 'from-amber-700 to-amber-500' },
-    { id: 2, name: 'Cashews', icon: '🌰', gradient: 'from-yellow-700 to-yellow-500' },
-    { id: 3, name: 'Pistachios', icon: '🥜', gradient: 'from-green-500 to-green-300' },
-    { id: 4, name: 'Walnuts', icon: '🌰', gradient: 'from-amber-800 to-amber-600' },
-    { id: 5, name: 'Mixed Nuts', icon: '🎁', gradient: 'from-orange-500 to-amber-300' },
-  ],
+  categories: loadCategoriesFromStorage(),
   loading: false,
   error: null,
   searchQuery: '',
   selectedCategory: 'all',
   sortBy: 'featured',
+  minPrice: 0,
+  maxPrice: 1000,
 };
 
 const productsSlice = createSlice({
@@ -52,6 +69,11 @@ const productsSlice = createSlice({
     setSelectedCategory: (state, action) => {
       state.selectedCategory = action.payload;
     },
+    setPriceRange: (state, action) => {
+      const { min, max } = action.payload;
+      state.minPrice = min;
+      state.maxPrice = max;
+    },
     setSortBy: (state, action) => {
       state.sortBy = action.payload;
     },
@@ -60,7 +82,7 @@ const productsSlice = createSlice({
       const newProduct = {
         ...action.payload,
         id: Date.now(), // Generate unique ID
-        rating: 0,
+        rating: 4.5,
         reviews: 0,
         isFeatured: false,
       };
@@ -85,34 +107,42 @@ const productsSlice = createSlice({
       saveProductsToStorage(state.products);
     },
     addCategory: (state, action) => {
+      const { name, image } = action.payload;
       const newCategory = {
-        id: Date.now(),
-        name: action.payload,
+        id: name.toLowerCase().replace(/\s+/g, '-'),
+        name: name,
+        image: image || '',
         icon: '📁',
-        gradient: 'from-purple-500 to-pink-500',
+        gradient: 'from-amber-600 to-orange-600',
       };
-      state.categories.push(newCategory);
+      // Prevent duplicate IDs
+      if (!state.categories.find(c => c.id === newCategory.id)) {
+        state.categories.push(newCategory);
+        saveCategoriesToStorage(state.categories);
+      }
     },
     updateCategory: (state, action) => {
-      const { oldName, newName } = action.payload;
-      const categoryIndex = state.categories.findIndex(c => c.name === oldName);
+      const { id, name, image } = action.payload;
+      const categoryIndex = state.categories.findIndex(c => c.id === id);
       if (categoryIndex !== -1) {
-        state.categories[categoryIndex].name = newName;
+        const oldName = state.categories[categoryIndex].name;
+        state.categories[categoryIndex].name = name;
+        if (image) state.categories[categoryIndex].image = image;
+        
+        // Also update products with the old category name to the new name
+        state.products.forEach(p => {
+          if (p.category === oldName) {
+            p.category = name;
+          }
+        });
+        saveProductsToStorage(state.products);
+        saveCategoriesToStorage(state.categories);
       }
-      // Also update products with the old category name
-      state.products.forEach(p => {
-        if (p.category === oldName) {
-          p.category = newName;
-        }
-      });
-      // Update featured products
-      state.featuredProducts = state.products.slice(0, 6);
-      saveProductsToStorage(state.products);
     },
     deleteCategory: (state, action) => {
-      state.categories = state.categories.filter(c => c.name !== action.payload);
-      // Update featured products after category deletion
-      state.featuredProducts = state.products.slice(0, 6);
+      const id = action.payload;
+      state.categories = state.categories.filter(c => c.id !== id);
+      saveCategoriesToStorage(state.categories);
     },
   },
   extraReducers: (builder) => {
@@ -135,6 +165,7 @@ const productsSlice = createSlice({
 export const {
   setSearchQuery,
   setSelectedCategory,
+  setPriceRange,
   setSortBy,
   addProduct,
   updateProduct,
@@ -159,6 +190,11 @@ export const selectFilteredProducts = (state) => {
       p.name.toLowerCase().includes(state.products.searchQuery.toLowerCase())
     );
   }
+
+  // Filter by price
+  filtered = filtered.filter(p => 
+    p.price >= state.products.minPrice && p.price <= state.products.maxPrice
+  );
 
   // Sort
   switch (state.products.sortBy) {

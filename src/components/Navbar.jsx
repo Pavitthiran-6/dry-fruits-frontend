@@ -70,7 +70,7 @@ const Navbar = () => {
                         <motion.div
                             whileHover={{ rotate: 360, scale: 1.1 }}
                             transition={{ duration: 0.5 }}
-                            className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 flex items-center justify-center"
+                            className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 flex items-center justify-center"
                         >
                             <span className="text-white text-xl font-bold">🥜</span>
                         </motion.div>
@@ -84,8 +84,8 @@ const Navbar = () => {
                                 key={link.name}
                                 to={link.path}
                                 className={`relative py-2 text-lg font-medium transition-colors ${location.pathname === link.path
-                                    ? 'text-purple-600'
-                                    : 'text-gray-700 hover:text-purple-600'
+? 'text-amber-700'
+: 'text-gray-700 hover:text-amber-700'
                                     }`}
                             >
                                 {link.name}
@@ -93,7 +93,7 @@ const Navbar = () => {
                                     initial={{ scaleX: 0 }}
                                     animate={{ scaleX: location.pathname === link.path ? 1 : 0 }}
                                     whileHover={{ scaleX: 1 }}
-                                    className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 origin-left"
+                                    className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 origin-left"
                                 />
                             </Link>
                         ))}
@@ -133,7 +133,7 @@ const Navbar = () => {
                                                 <Link
                                                     to="/profile"
                                                     onClick={() => setIsProfileOpen(false)}
-                                                    className="flex items-center px-4 py-2 text-gray-700 hover:bg-purple-50 transition-colors"
+                                                    className="flex items-center px-4 py-2 text-gray-700 hover:bg-amber-50 transition-colors"
                                                 >
                                                     <HiUser className="w-5 h-5 mr-3" />
                                                     My Profile
@@ -141,7 +141,7 @@ const Navbar = () => {
                                                 <Link
                                                     to="/orders"
                                                     onClick={() => setIsProfileOpen(false)}
-                                                    className="flex items-center px-4 py-2 text-gray-700 hover:bg-purple-50 transition-colors"
+                                                    className="flex items-center px-4 py-2 text-gray-700 hover:bg-amber-50 transition-colors"
                                                 >
                                                     <HiClipboardList className="w-5 h-5 mr-3" />
                                                     My Orders
@@ -149,7 +149,7 @@ const Navbar = () => {
                                                 <Link
                                                     to="/settings"
                                                     onClick={() => setIsProfileOpen(false)}
-                                                    className="flex items-center px-4 py-2 text-gray-700 hover:bg-purple-50 transition-colors"
+                                                    className="flex items-center px-4 py-2 text-gray-700 hover:bg-amber-50 transition-colors"
                                                 >
                                                     <HiCog className="w-5 h-5 mr-3" />
                                                     Settings
@@ -170,10 +170,10 @@ const Navbar = () => {
                             </div>
                         ) : (
                             <>
-                                <Link to="/login" className="flex items-center space-x-1 text-gray-700 hover:text-purple-600 transition-colors">
+                                <Link to="/login" className="flex items-center space-x-1 text-gray-700 hover:text-amber-700 transition-colors">
                                     <span className="font-medium">Login</span>
                                 </Link>
-                                <Link to="/signup" className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-medium rounded-lg hover:from-pink-600 hover:to-purple-600 transition-all">
+                                <Link to="/signup" className="px-4 py-2 bg-gradient-to-r from-amber-700 to-orange-600 text-white font-medium rounded-lg hover:from-amber-700 hover:to-orange-600 transition-all">
                                     Sign Up
                                 </Link>
                             </>
@@ -188,14 +188,14 @@ const Navbar = () => {
                                 )}
                             </motion.div>
                         </Link>
-                        <Link to="/cart" className="relative p-2 text-gray-700 hover:text-purple-600 transition-colors">
+                        <Link to="/cart" className="relative p-2 text-gray-700 hover:text-amber-700 transition-colors">
                             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                                 <HiShoppingCart className="w-6 h-6" />
                                 {cartItems > 0 && (
                                     <motion.span
                                         initial={{ scale: 0 }}
                                         animate={{ scale: 1 }}
-                                        className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+                                        className="absolute -top-1 -right-1 bg-gradient-to-r from-amber-700 to-orange-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
                                     >
                                         {cartItems}
                                     </motion.span>
@@ -235,7 +235,7 @@ const Navbar = () => {
                                 <HiMenu className="w-8 h-8" />
                             )}
                             {cartItems > 0 && (
-                                <span className="absolute -top-0 -right-0 w-4 h-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                                <span className="absolute -top-0 -right-0 w-4 h-4 bg-gradient-to-r from-amber-700 to-orange-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                                     {cartItems > 9 ? '9+' : cartItems}
                                 </span>
                             )}
@@ -265,13 +265,13 @@ const Navbar = () => {
                                         to={link.path}
                                         onClick={() => setIsMobileMenuOpen(false)}
                                         className={`block py-3 px-4 rounded-lg font-medium transition-colors ${location.pathname === link.path
-                                            ? 'bg-gradient-to-r from-pink-500/10 to-purple-500/10 text-purple-600'
+                                            ? 'bg-gradient-to-r from-amber-700/10 to-orange-600/10 text-amber-700'
                                             : 'text-gray-700 hover:bg-gray-100'
                                             }`}
                                     >
                                         {link.name}
                                         {link.name === 'Cart' && cartItems > 0 && (
-                                            <span className="ml-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs px-2 py-1 rounded-full">
+                                            <span className="ml-2 bg-gradient-to-r from-amber-700 to-orange-600 text-white text-xs px-2 py-1 rounded-full">
                                                 {cartItems}
                                             </span>
                                         )}

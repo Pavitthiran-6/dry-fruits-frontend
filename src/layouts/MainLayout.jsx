@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 const MainLayout = () => {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100">
             <Navbar />
             <main>
                 <Outlet />

@@ -64,7 +64,7 @@ const AdminLogin = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50 flex flex-col">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100 flex flex-col">
             <div className="flex-grow pt-24 md:pt-28 lg:pt-32 pb-24 md:pb-28 lg:pb-32 px-4">
                 <div className="max-w-7xl mx-auto h-full flex items-center justify-center">
                     <motion.div
@@ -76,7 +76,7 @@ const AdminLogin = () => {
                             {/* Logo and Title */}
                             <div className="text-center mb-8">
                                 <Link to="/" className="inline-block">
-                                    <div className="w-20 h-20 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 flex items-center justify-center mx-auto mb-4">
+                                    <div className="w-20 h-20 rounded-full bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 flex items-center justify-center mx-auto mb-4">
                                         <span className="text-4xl">🥜</span>
                                     </div>
                                 </Link>
@@ -98,7 +98,7 @@ const AdminLogin = () => {
                                             onChange={handleInputChange}
                                             onKeyDown={handleKeyDown}
                                             required
-                                            className="w-full pl-14 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm"
+                                            className="w-full pl-14 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm"
                                             placeholder="admin@gmail.com"
                                         />
                                     </div>
@@ -116,7 +116,7 @@ const AdminLogin = () => {
                                             onChange={handleInputChange}
                                             onKeyDown={handleKeyDown}
                                             required
-                                            className="w-full pl-14 pr-14 py-3 rounded-xl border-2 border-gray-100 focus:border-purple-400 focus:outline-none transition-colors text-sm"
+                                            className="w-full pl-14 pr-14 py-3 rounded-xl border-2 border-gray-100 focus:border-amber-600 focus:outline-none transition-colors text-sm"
                                             placeholder="••••••••"
                                         />
                                         <button
@@ -139,7 +139,7 @@ const AdminLogin = () => {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     type="submit"
-                                    className="w-full py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-400 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow mt-2"
+                                    className="w-full py-4 bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow mt-2"
                                 >
                                     Sign In
                                 </motion.button>
@@ -147,7 +147,7 @@ const AdminLogin = () => {
 
                             {/* Back to Home */}
                             <p className="mt-8 text-center text-gray-600">
-                                <Link to="/" className="text-purple-600 font-semibold hover:text-purple-700">
+                                <Link to="/" className="text-amber-700 font-semibold hover:text-amber-800">
                                     Back to Home
                                 </Link>
                             </p>

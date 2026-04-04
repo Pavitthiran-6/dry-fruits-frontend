@@ -33,12 +33,13 @@ const AdminInventory = lazy(() => import('./pages/admin/AdminInventory'));
 const AdminSettings = lazy(() => import('./pages/admin/AdminSettings'));
 const AddEditProduct = lazy(() => import('./pages/admin/AddEditProduct'));
 const AdminCategory = lazy(() => import('./pages/admin/AdminCategory'));
+const AdminCoupon = lazy(() => import('./pages/admin/AdminCoupon'));
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
 
 // Loading component
 const LoadingSpinner = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-50 via-purple-50 to-orange-50">
-    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100">
+    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-amber-600"></div>
   </div>
 );
 
@@ -132,6 +133,7 @@ const AnimatedRoutes = () => {
           <Route path="customers" element={<AnimatedPage><AdminCustomers /></AnimatedPage>} />
           <Route path="inventory" element={<AnimatedPage><AdminInventory /></AnimatedPage>} />
           <Route path="category" element={<AnimatedPage><AdminCategory /></AnimatedPage>} />
+          <Route path="coupons" element={<AnimatedPage><AdminCoupon /></AnimatedPage>} />
           <Route path="settings" element={<AnimatedPage><AdminSettings /></AnimatedPage>} />
           <Route path="add-product" element={<AnimatedPage><AddEditProduct /></AnimatedPage>} />
           <Route path="edit-product/:id" element={<AnimatedPage><AddEditProduct /></AnimatedPage>} />
